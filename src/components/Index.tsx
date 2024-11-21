@@ -1,7 +1,6 @@
 import {
   ArrowLeft2,
   ArrowRight2,
-  ArrowSwapVertical,
   Edit,
   SearchNormal1,
   Trash,
@@ -11,21 +10,18 @@ import { useEffect, useMemo, useState } from "react";
 import { Bounce, toast } from "react-toastify";
 import Form from "./Form";
 
-
 const Index = (): JSX.Element => {
   type Product = {
     id: number;
     product_name: string;
     price: number;
     category: string;
-    
   };
 
   const [isFormOpen, setIsFormOpen] = useState(false);
-  const [products, setProducts] = useState<Product[]>([]); 
+  const [products, setProducts] = useState<Product[]>([]);
   const [currentPage, setCurrentPage] = useState<number>(1);
   const [search, setSearch] = useState<string>("");
-  const [card, setCard] = useState<boolean>(false);
   const [editProduct, setEditProduct] = useState<Product | null>(null);
 
   const itemsPerPage = 10;
@@ -35,7 +31,7 @@ const Index = (): JSX.Element => {
     if (storedData) {
       setProducts(JSON.parse(storedData));
     }
-  }, []); // Removed unnecessary dependencies
+  }, []); 
 
   const filteredProducts = useMemo(() => {
     if (!search) return products;
@@ -66,11 +62,9 @@ const Index = (): JSX.Element => {
       (product: { id: number }) => product.id !== id
     );
 
-    // Update LocalStorage and state
     localStorage.setItem("product", JSON.stringify(updatedProducts));
     setProducts(updatedProducts);
 
-    // Show Toast
     toast.success("Product removed successfully!", {
       position: "bottom-right",
       autoClose: 5000,
@@ -84,15 +78,20 @@ const Index = (): JSX.Element => {
     });
   };
 
-  const handleAddProduct = (data: { name: string; category: string; price: number }) => {
-    const lastProductId = products.length > 0 ? products[products.length - 1].id : 0;
+  const handleAddProduct = (data: {
+    name: string;
+    category: string;
+    price: number;
+  }) => {
+    const lastProductId =
+      products.length > 0 ? products[products.length - 1].id : 0;
     const newProduct: Product = {
       id: lastProductId + 1,
-      product_name: data.name, // Map name ke product_name
+      product_name: data.name,
       category: data.category,
       price: data.price,
     };
-  
+
     const updatedProducts = [...products, newProduct];
     setProducts(updatedProducts);
     localStorage.setItem("product", JSON.stringify(updatedProducts));
@@ -110,23 +109,25 @@ const Index = (): JSX.Element => {
     });
   };
 
-  const updateProduct = (updatedProduct: { id: number; name: string; category: string; price: number }) => {
-    // Memastikan tipe produk sesuai dengan yang diharapkan
+  const updateProduct = (updatedProduct: { id?: number; name: string; category: string; price: number }) => {
+    if (!updatedProduct.id) {
+      console.error("ID is required to update a product");
+      return;
+    }
+  
     const updatedProducts = products.map((product) =>
       product.id === updatedProduct.id
-        ? { ...product, product_name: updatedProduct.name, category: updatedProduct.category, price: updatedProduct.price } // Pastikan properti sesuai
+        ? { ...product, product_name: updatedProduct.name, category: updatedProduct.category, price: updatedProduct.price }
         : product
     );
   
-    // Update state products
     setProducts(updatedProducts);
-  
-    // Simpan ke localStorage setelah update state
-    localStorage.setItem("products", JSON.stringify(updatedProducts));
+    localStorage.setItem("product", JSON.stringify(updatedProducts));
   };
 
   const handleEditProduct = (product: Product) => {
     setEditProduct(product); // Set produk yang akan diedit
+    setIsFormOpen(true);
   };
 
   const handleCloseForm = () => {
@@ -138,9 +139,18 @@ const Index = (): JSX.Element => {
       {isFormOpen && (
         <Form
           onClose={() => setIsFormOpen(false)}
-          onSubmit={handleAddProduct}
+          onSubmit={editProduct ? updateProduct : handleAddProduct}
           products={products}
-          editProduct={editProduct}
+          editProduct={
+            editProduct
+              ? {
+                  name: editProduct.product_name,
+                  category: editProduct.category,
+                  price: editProduct.price,
+                  id: editProduct.id,
+                }
+              : undefined
+          }
         />
       )}
       <div>
@@ -208,7 +218,7 @@ const Index = (): JSX.Element => {
                   <div className="w-20 flex gap-2">
                     <button
                       className="p-1.5 bg-gray-50 border border-gray-100 rounded-lg duration-300 hover:bg-gray-800 btn-hvr"
-                      onClick={() => setCard(true)}
+                      onClick={() => handleEditProduct(data)}
                     >
                       <Edit className="w-4 h-4 text-gray-600 icon" />
                     </button>
