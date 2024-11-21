@@ -31,7 +31,7 @@ const Index = (): JSX.Element => {
     if (storedData) {
       setProducts(JSON.parse(storedData));
     }
-  }, []); 
+  }, []);
 
   const filteredProducts = useMemo(() => {
     if (!search) return products;
@@ -109,24 +109,34 @@ const Index = (): JSX.Element => {
     });
   };
 
-  const updateProduct = (updatedProduct: { id?: number; name: string; category: string; price: number }) => {
+  const updateProduct = (updatedProduct: {
+    id?: number;
+    name: string;
+    category: string;
+    price: number;
+  }) => {
     if (!updatedProduct.id) {
       console.error("ID is required to update a product");
       return;
     }
-  
+
     const updatedProducts = products.map((product) =>
       product.id === updatedProduct.id
-        ? { ...product, product_name: updatedProduct.name, category: updatedProduct.category, price: updatedProduct.price }
+        ? {
+            ...product,
+            product_name: updatedProduct.name,
+            category: updatedProduct.category,
+            price: updatedProduct.price,
+          }
         : product
     );
-  
+
     setProducts(updatedProducts);
     localStorage.setItem("product", JSON.stringify(updatedProducts));
   };
 
   const handleEditProduct = (product: Product) => {
-    setEditProduct(product); // Set produk yang akan diedit
+    setEditProduct(product);
     setIsFormOpen(true);
   };
 
@@ -153,9 +163,11 @@ const Index = (): JSX.Element => {
           }
         />
       )}
-      <div>
-        <div className="flex justify-between items-center">
+      <div className="w-fit">
+        <div className="w-fit flex justify-between items-center">
           <h1 className="text-xl font-semibold py-4">Product Management App</h1>
+        </div>
+        <div className="flex justify-between mb-5">
           <div className="w-fit flex items-center bg-white border border-zinc-200 rounded-lg overflow-hidden">
             <div className="pl-4 py-2">
               <SearchNormal1 className="w-5 text-gray-500" />
@@ -165,13 +177,11 @@ const Index = (): JSX.Element => {
               placeholder="Find by name or category here..."
               onChange={(e) => {
                 setSearch(e.target.value);
-                setCurrentPage(1); // Reset to the first page on search
+                setCurrentPage(1);
               }}
               className="bg-transparent outline-none pl-4 w-64 mr-4"
             />
           </div>
-        </div>
-        <div className="w-full flex justify-end mb-5">
           {/* <button className="py-2 px-3 bg-gray-100 text-gray-600 rounded-lg duration-300 hover:bg-gray-800 hover:text-white">Choose</button> */}
           <button
             className="py-2 px-3 bg-gray-800 text-white rounded-lg duration-300 hover:bg-gray-600"
@@ -180,19 +190,19 @@ const Index = (): JSX.Element => {
             Add Product
           </button>
         </div>
-        <div className="pt-4 bg-white border border-gray-100 rounded-lg mb-3">
+        <div className="w-fit pt-4 bg-white border border-gray-100 rounded-lg mb-3">
           <div className="w-fit">
-            <div className="mx-4 flex gap-3">
-              <h6 className="text-xs text-zinc-400 pb-3 font-semibold text-left w-16">
+            <div className="mx-4 flex gap-3 max-sm:gap-1 max-sm:mx-2">
+              <h6 className="text-xs text-zinc-400 pb-3 font-semibold text-left w-16 max-lg:w-10 max-sm:w-5">
                 NO.
               </h6>
-              <h6 className="text-xs text-zinc-400 pb-3 font-semibold text-left w-80">
+              <h6 className="text-xs text-zinc-400 pb-3 font-semibold text-left w-80 max-lg:w-52 max-sm:w-44">
                 PRODUCT NAME
               </h6>
-              <h6 className="text-xs text-zinc-400 pb-3 font-semibold text-left w-48">
+              <h6 className="text-xs text-zinc-400 pb-3 font-semibold text-left w-48 max-lg:w-36 max-sm:w-24">
                 CATEGORY
               </h6>
-              <h6 className="text-xs text-zinc-400 pb-3 font-semibold text-left w-28">
+              <h6 className="text-xs text-zinc-400 pb-3 font-semibold text-left w-28 max-lg:w-16 max-sm:w-16">
                 PRICE
               </h6>
               <h6 className="text-xs text-zinc-400 pb-3 font-semibold text-left w-20">
@@ -202,17 +212,20 @@ const Index = (): JSX.Element => {
             <hr className="w-full border-zinc-100" />
             {currentData.length > 0 ? (
               currentData.map((data, idx) => (
-                <div className="mx-4 flex gap-3 items-center" key={data.id}>
-                  <div className="text-base text-zinc-400 py-3 w-16">
+                <div
+                  className="mx-4 flex gap-3 items-center max-sm:gap-1 max-sm:mx-2"
+                  key={data.id}
+                >
+                  <div className="text-base text-zinc-400 py-3 w-16 max-lg:w-10 max-sm:w-5 max-sm:text-xs">
                     {idx + 1 + (currentPage - 1) * itemsPerPage}
                   </div>
-                  <div className="text-base text-zinc-800 py-3 w-80">
+                  <div className="text-base text-zinc-800 truncate py-3 pr-3 w-80 max-lg:w-52 max-sm:w-44 max-sm:text-sm">
                     {data.product_name}
                   </div>
-                  <div className="text-base text-zinc-400 py-3 w-48">
+                  <div className="text-base text-zinc-400 py-3 w-48 max-lg:w-36 max-sm:w-24 max-sm:text-xs">
                     {data.category}
                   </div>
-                  <div className="text-base text-zinc-800 py-3 w-28">
+                  <div className="text-base text-zinc-800 py-3 w-28 max-lg:w-20 max-sm:w-16 max-sm:text-xs">
                     ${data.price}
                   </div>
                   <div className="w-20 flex gap-2">
