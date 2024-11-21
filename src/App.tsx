@@ -1,144 +1,163 @@
 // import Card from './components/Card'
-import Index from './components/Index'
-
+import Index from "./components/Index";
 
 function App() {
-
   const productData = [
     {
-      "Product Name": "Classic Leather Wallet",
-      "Price": 29.99,
-      "Category": "Accessories"
+      id: "1",
+      product_name: "Classic Leather Wallet",
+      price: 29.99,
+      category: "Accessories",
     },
     {
-      "Product Name": "Wireless Bluetooth Earbuds",
-      "Price": 59.99,
-      "Category": "Electronics"
+      id: "2",
+      product_name: "Wireless Bluetooth Earbuds",
+      price: 59.99,
+      category: "Electronics",
     },
     {
-      "Product Name": "Men's Running Shoes",
-      "Price": 79.99,
-      "Category": "Shoes"
+      id: "3",
+      product_name: "Men's Running Shoes",
+      price: 79.99,
+      category: "Shoes",
     },
     {
-      "Product Name": "Women's Yoga Leggings",
-      "Price": 39.99,
-      "Category": "Clothing"
+      id: "4",
+      product_name: "Women's Yoga Leggings",
+      price: 39.99,
+      category: "Clothing",
     },
     {
-      "Product Name": "4K Ultra HD Smart TV",
-      "Price": 499.99,
-      "Category": "Electronics"
+      id: "5",
+      product_name: "4K Ultra HD Smart TV",
+      price: 499.99,
+      category: "Electronics",
     },
     {
-      "Product Name": "Stainless Steel Water Bottle",
-      "Price": 19.99,
-      "Category": "Accessories"
+      id: "6",
+      product_name: "Stainless Steel Water Bottle",
+      price: 19.99,
+      category: "Accessories",
     },
     {
-      "Product Name": "Adjustable Office Chair",
-      "Price": 149.99,
-      "Category": "Furniture"
+      id: "7",
+      product_name: "Adjustable Office Chair",
+      price: 149.99,
+      category: "Furniture",
     },
     {
-      "Product Name": "Gaming Mechanical Keyboard",
-      "Price": 89.99,
-      "Category": "Electronics"
+      id: "8",
+      product_name: "Gaming Mechanical Keyboard",
+      price: 89.99,
+      category: "Electronics",
     },
     {
-      "Product Name": "Bamboo Cutting Board Set",
-      "Price": 24.99,
-      "Category": "Home & Kitchen"
+      id: "9",
+      product_name: "Bamboo Cutting Board Set",
+      price: 24.99,
+      category: "Home & Kitchen",
     },
     {
-      "Product Name": "Men's Classic Wristwatch",
-      "Price": 129.99,
-      "Category": "Accessories"
+      id: "10",
+      product_name: "Men's Classic Wristwatch",
+      price: 129.99,
+      category: "Accessories",
     },
     {
-      "Product Name": "Fitness Tracker Watch",
-      "Price": 99.99,
-      "Category": "Electronics"
+      id: "11",
+      product_name: "Fitness Tracker Watch",
+      price: 99.99,
+      category: "Electronics",
     },
     {
-      "Product Name": "Cozy Knit Throw Blanket",
-      "Price": 34.99,
-      "Category": "Home & Kitchen"
+      id: "12",
+      product_name: "Cozy Knit Throw Blanket",
+      price: 34.99,
+      category: "Home & Kitchen",
     },
     {
-      "Product Name": "Ceramic Coffee Mug Set",
-      "Price": 22.99,
-      "Category": "Home & Kitchen"
+      id: "13",
+      product_name: "Ceramic Coffee Mug Set",
+      price: 22.99,
+      category: "Home & Kitchen",
     },
     {
-      "Product Name": "Women's Ankle Boots",
-      "Price": 69.99,
-      "Category": "Shoes"
+      id: "14",
+      product_name: "Women's Ankle Boots",
+      price: 69.99,
+      category: "Shoes",
     },
     {
-      "Product Name": "Noise-Cancelling Headphones",
-      "Price": 199.99,
-      "Category": "Electronics"
+      id: "15",
+      product_name: "Noise-Cancelling Headphones",
+      price: 199.99,
+      category: "Electronics",
     },
     {
-      "Product Name": "Wooden Desk Organizer",
-      "Price": 39.99,
-      "Category": "Office Supplies"
+      id: "16",
+      product_name: "Wooden Desk Organizer",
+      price: 39.99,
+      category: "Office Supplies",
     },
     {
-      "Product Name": "Luxury Scented Candle",
-      "Price": 24.99,
-      "Category": "Home & Kitchen"
+      id: "17",
+      product_name: "Luxury Scented Candle",
+      price: 24.99,
+      category: "Home & Kitchen",
     },
     {
-      "Product Name": "Stainless Steel Cookware Set",
-      "Price": 129.99,
-      "Category": "Home & Kitchen"
+      id: "18",
+      product_name: "Stainless Steel Cookware Set",
+      price: 129.99,
+      category: "Home & Kitchen",
     },
     {
-      "Product Name": "Men's Hooded Sweatshirt",
-      "Price": 49.99,
-      "Category": "Clothing"
+      id: "19",
+      product_name: "Men's Hooded Sweatshirt",
+      price: 49.99,
+      category: "Clothing",
     },
     {
-      "Product Name": "Wireless Charging Pad",
-      "Price": 29.99,
-      "Category": "Electronics"
+      id: "20",
+      product_name: "Wireless Charging Pad",
+      price: 29.99,
+      category: "Electronics",
     },
     {
-      "Product Name": "Women's Crossbody Bag",
-      "Price": 59.99,
-      "Category": "Accessories"
+      id: "21",
+      product_name: "Women's Crossbody Bag",
+      price: 59.99,
+      category: "Accessories",
     },
     {
-      "Product Name": "Electric Stand Mixer",
-      "Price": 229.99,
-      "Category": "Home & Kitchen"
+      id: "22",
+      product_name: "Electric Stand Mixer",
+      price: 229.99,
+      category: "Home & Kitchen",
     },
     {
-      "Product Name": "Digital DSLR Camera",
-      "Price": 799.99,
-      "Category": "Electronics"
+      id: "23",
+      product_name: "Digital DSLR Camera",
+      price: 799.99,
+      category: "Electronics",
     },
     {
-      "Product Name": "High-Performance Laptop",
-      "Price": 1199.99,
-      "Category": "Electronics"
-    }
+      id: "24",
+      product_name: "High-Performance Laptop",
+      price: 1199.99,
+      category: "Electronics",
+    },
   ];
-  
-  if(!localStorage.getItem('product')){
-    localStorage.setItem('product', JSON.stringify(productData));
+
+  if (!localStorage.getItem("product")) {
+    localStorage.setItem("product", JSON.stringify(productData));
   }
 
   return (
     <>
-      <div>
-        {/* <Card/> */}
-        <Index/>
-      </div>
+      <Index />
     </>
-  )
+  );
 }
 
-export default App
+export default App;
